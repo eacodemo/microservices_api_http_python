@@ -9,40 +9,55 @@ def index():
     return '¡Bienvenido al microservicio de ordenes!'
 
 
+# Endpoint para obtener todas las órdenes
 @app.route('/ordenes', methods=['GET'])
-def get_all_ordenes():
+def get_ordenes():
+    message = {
+        'status': 404,
+        'message': 'Algo salió mal'
+    }
     try:
         ordenes = Orden.query.all()
-        ordenes_data = [{'id': orden.id, 'timestamp': orden.timestamp,
-                         'recetas_id': orden.recetas_id, 'estado_id': orden.estado_id} for orden in ordenes]
-        return jsonify({'status': 200, 'message': 'Se recuperan todas las órdenes', 'data': ordenes_data})
+        data = []
+        for orden in ordenes:
+            data.append({
+                'id': orden.id,
+                'timestamp': orden.timestamp,
+                'recetas_id': orden.recetas_id,
+                'estado_id': orden.estado_id
+            })
+        message.update({
+            'status': 200,
+            'message': 'Se recuperan todas las órdenes',
+            'data': data
+        })
     except Exception as e:
-        return jsonify({'status': 500, 'message': 'Error al recuperar órdenes', 'error': str(e)})
+        print(e)
+    return jsonify(message)
 
+# Endpoint para agregar una nueva orden
 @app.route('/ordenes', methods=['POST'])
-def create_orden():
+def agregar_orden():
+    message = {
+        'status': 404,
+        'message': 'Algo salió mal'
+    }
     try:
         data = request.get_json()
-        nueva_orden = Orden(timestamp=data['timestamp'], recetas_id=data['recetas_id'], estado_id=data['estado_id'])
+        nueva_orden = Orden(
+            timestamp=data['timestamp'],
+            recetas_id=data['recetas_id'],
+            estado_id=data['estado_id']
+        )
         db.session.add(nueva_orden)
         db.session.commit()
-        return jsonify({'status': 201, 'message': 'Orden creada exitosamente'})
+        message.update({
+            'status': 201,
+            'message': 'Orden agregada exitosamente'
+        })
     except Exception as e:
-        return jsonify({'status': 500, 'message': 'Error al crear orden', 'error': str(e)})
-
-@app.route('/ordenes/<int:orden_id>', methods=['GET'])
-def get_orden_by_id(orden_id):
-    try:
-        orden = Orden.query.get(orden_id)
-        if orden:
-            orden_data = {'id': orden.id, 'timestamp': orden.timestamp,
-                          'recetas_id': orden.recetas_id, 'estado_id': orden.estado_id}
-            return jsonify({'status': 200, 'message': 'Orden encontrada', 'data': orden_data})
-        else:
-            return jsonify({'status': 404, 'message': 'Orden no encontrada'})
-    except Exception as e:
-        return jsonify({'status': 500, 'message': 'Error al recuperar orden', 'error': str(e)})
-
+        print(e)
+    return jsonify(message)
 
 if __name__ == '__main__':
     app.run(debug=True)
