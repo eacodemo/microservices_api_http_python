@@ -38,6 +38,7 @@ def get_all_recetas():
         message['message'] = f"Error: {str(e)}"  # Agrega el mensaje de error específico
     return jsonify(message)
 
+
 @app.route('/recetas/<int:receta_id>', methods=['GET'])
 def get_receta(receta_id):
     """
