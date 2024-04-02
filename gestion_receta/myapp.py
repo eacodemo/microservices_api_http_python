@@ -3,6 +3,10 @@ from flask.json import jsonify
 from requests import request
 from settings import db, app
 from models import Receta, IngredienteReceta
+from flask import Blueprint
+
+myapp = Blueprint('gestion_recetas', __name__, url_prefix='/recetas')
+
 
 
 @app.route('/')

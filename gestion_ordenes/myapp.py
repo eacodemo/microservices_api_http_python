@@ -3,7 +3,11 @@ from flask.json import jsonify
 from requests import request
 from settings import db, app
 from models import Orden
+from flask import Blueprint, request
+from .models import Estado
+from plaza_mercado.models import MercadoPlace
 
+myapp = Blueprint('gestion_ordenes', __name__, url_prefix='/ordenes')
 @app.route('/')
 def index():
     return '¡Bienvenido al microservicio de ordenes!'

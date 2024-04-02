@@ -9,3 +9,6 @@ Werkzeug==1.0.1
 Flask-Login
 Flask-Principal
 Flask-Migrate
+Flask
+Flask-SQLAlchemy
+requests

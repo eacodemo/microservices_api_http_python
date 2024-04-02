@@ -1,4 +1,8 @@
 from flask import Flask
+from flask import Blueprint
+
+myapp = Blueprint('plaza_mercado', __name__, url_prefix='/mercado')
+
 
 app = Flask(__name__)
 

@@ -10,9 +10,14 @@ class IngredienteReceta(db.Model):
     ingredientes_id = db.Column(db.Integer, db.ForeignKey('Ingredientes.Id'), nullable=False)
     recetas_id = db.Column(db.Integer, db.ForeignKey('Recetas.Id'), nullable=False)
 
+    def __repr__(self):
+        return f'<RecetaIngrediente {self.ingrediente_id} ({self.cantidad}) for {self.receta_id}>'
+
 class Receta(db.Model):
     __tablename__ = 'Recetas'
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(50), nullable=False)
     descripcion = db.Column(db.Text, nullable=False)
 
+    def __repr__(self):
+        return f'<Receta {self.nombre}>'

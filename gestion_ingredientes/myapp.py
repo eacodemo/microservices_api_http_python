@@ -3,12 +3,15 @@ from flask.json import jsonify
 from requests import request
 from settings import db, app
 from models import Ingrediente
+from flask import Blueprint
 
 
+myapp = Blueprint('gestion_ingredientes', __name__, url_prefix='/ingredientes')
 
-@app.route('/')
-def index():
-    return '¡Bienvenido al microservicio de gestion de ingredientes!'
+@myapp.route('/')
+def get_ingredients():
+    ingredients = Ingrediente.query.all()
+    return {'ingredients': [ingredient.serialize for ingredient in ingredients]}
 
 
 # Ruta para obtener la lista de ingredientes disponibles
