@@ -1,24 +1,26 @@
 from flask import Flask
-from gestion_estados import myapp, models
-from gestion_ingredientes import myapp, models
-from gestion_ordenes import myapp, models
-from gestion_receta import myapp, models
-from plaza_mercado import myapp, models
 
+# Import the required modules and configurations
+from config import Config
+from gestion_estados import myapp as gestion_estados_app
+from gestion_ingredientes import myapp as gestion_ingredientes_app
+from gestion_receta import myapp as gestion_recetas_app
+from gestion_ordenes import myapp as gestion_ordenes_app
+from plaza_mercado import myapp as plaza_mercado_app
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config')
+    app.config.from_object(Config)
 
     # Initialize blueprints and extensions
-    from.import gestion_ingredientes, gestion_recetas, gestion_estados, gestion_ordenes, plaza_mercado
-    app.register_blueprint(gestion_ingredientes.myapp)
-    app.register_blueprint(gestion_recetas.myapp)
-    app.register_blueprint(gestion_estados.myapp)
-    app.register_blueprint(gestion_ordenes.myapp)
-    app.register_blueprint(plaza_mercado.myapp)
+    app.register_blueprint(gestion_ingredientes_app, url_prefix="/ingredientes")
+    app.register_blueprint(gestion_recetas_app, url_prefix="/recetas")
+    app.register_blueprint(gestion_estados_app, url_prefix="/estados")
+    app.register_blueprint(gestion_ordenes_app, url_prefix="/ordenes")
+    app.register_blueprint(plaza_mercado_app, url_prefix="/plaza_mercado")
 
     return app
 
-    if __name__ == '__main__':
-        app.run(debug=True)
+if __name__ == '__main__':
+    app = create_app()
+    app.run(debug=True)
