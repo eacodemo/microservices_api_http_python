@@ -1,0 +1,70 @@
+version: '3'
+services:
+  # Servicio principal
+  microservices.api.http-python:
+    build: .
+    ports:
+      - "8080:8080"  
+    volumes:
+      - .:/app  # Monta el directorio local en el contenedor
+    depends_on:
+      - gestion_estados
+      - gestion_ingredientes
+      - gestion_ordenes
+      - gestion_receta
+      - plaza_mercado
+
+  # Microservicio 1: gestion_estados
+  gestion_estados:
+    build:
+      context: ./gestion_estados
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"  # Mapea el puerto 8080 del contenedor al puerto 8081 del host
+    working_dir: /myapp
+    volumes:
+      - ./gestion_estados/:/myapp  # Monta el directorio local en el contenedor
+
+  # Microservicio 2: gestion_ingredientes
+  gestion_ingredientes:
+    build:
+      context: ./gestion_ingredientes
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8080"  # Mapea el puerto 8080 del contenedor al puerto 8082 del host
+    working_dir: /myapp
+    volumes:
+      - ./gestion_ingredientes/:/myapp  # Monta el directorio local en el contenedor
+
+  # Microservicio 3: gestion_ordenes
+  gestion_ordenes:
+    build:
+      context: ./gestion_ordenes
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8080"  # Mapea el puerto 8080 del contenedor al puerto 8083 del host
+    working_dir: /myapp
+    volumes:
+      - ./gestion_ordenes/:/myapp  # Monta el directorio local en el contenedor
+
+  # Microservicio 4: gestion_receta
+  gestion_receta:
+    build:
+      context: ./gestion_receta
+      dockerfile: Dockerfile
+    ports:
+      - "8084:8080"  # Mapea el puerto 8080 del contenedor al puerto 8084 del host
+    working_dir: /myapp
+    volumes:
+      - ./gestion_receta/:/myapp  # Monta el directorio local en el contenedor
+
+  # Microservicio 5: plaza_mercado
+  plaza_mercado:
+    build:
+      context: ./plaza_mercado
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8080"  # Mapea el puerto 8080 del contenedor al puerto 8085 del host
+    working_dir: /myapp
+    volumes:
+      - ./plaza_mercado/:/myapp  # Monta el directorio local en el contenedor
