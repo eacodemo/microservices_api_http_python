@@ -1,4 +1,10 @@
 from flask import Flask
+from gestion_estados import myapp, models
+from gestion_ingredientes import myapp, models
+from gestion_ordenes import myapp, models
+from gestion_receta import myapp, models
+from plaza_mercado import myapp, models
+
 
 def create_app():
     app = Flask(__name__)
@@ -13,3 +19,6 @@ def create_app():
     app.register_blueprint(plaza_mercado.myapp)
 
     return app
+
+    if __name__ == '__main__':
+        app.run(debug=True)

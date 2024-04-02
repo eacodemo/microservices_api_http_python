@@ -1,7 +1,7 @@
 from flask import Flask
 from flask.json import jsonify
-from models import Estado
-from settings import db, app
+from gestion_estados.models import Estado
+from gestion_estados.settings import db, app
 
 
 @app.route('/')

@@ -2,7 +2,7 @@ from flask import Flask
 from flask.json import jsonify
 from requests import request
 from settings import db, app
-from models import Ingrediente
+from gestion_ingredientes.models import Ingrediente
 from flask import Blueprint
 
 
