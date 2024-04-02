@@ -13,7 +13,8 @@ services:
       - gestion_ordenes
       - gestion_receta
       - plaza_mercado
-
+  
+  # Microservicios
   # Microservicio 1: gestion_estados
   gestion_estados:
     build:
