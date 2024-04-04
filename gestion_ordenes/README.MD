@@ -11,7 +11,7 @@
 
 ## Utilizar los metodos de CRUD para este proyecto
 
-### Ingredientes
+### Ordenes
 
 * Para obtener todos los registros de las Ordenes, con el metodo <code>GET</code>
   <ul>
