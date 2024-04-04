@@ -1,4 +1,12 @@
-# Proyecto Microservicios
+# Proyecto Microservicios Cocina
+## Microservicios
+### Gestion de estados
+### Gestion de ingredientes
+### Gestion de recetas
+### Gestion de ordenes
+### Plaza de mercado
+
+* Cada Microservicio se encuentra con un contenedor (Docker) pero la configuracion de los contenedores se encuentra en la raiz del proyecto en el archivo <li><code>docker-compose.yml</code></li>
 
 ## Python 
 
