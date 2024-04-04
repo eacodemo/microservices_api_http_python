@@ -5,7 +5,7 @@
 ### Gestion de recetas
 ### Gestion de ordenes
 ### Plaza de mercado
-#### Explicacion Docker
+## Explicacion Docker
 * Cada Microservicio se encuentra con un contenedor (Docker) pero la configuracion de los contenedores se encuentra en la raiz del proyecto en el archivo <code>docker-compose.yml</code>
 
 ## Python 
